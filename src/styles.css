@@ -1,0 +1,243 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * GENZZ CLUB design system.
+ * Premium streetwear: bone white paper, ink black, one acid-lime accent.
+ * All colours are semantic tokens — never hard-code colours in components.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+
+  --font-display: "Anton", "Arial Narrow", sans-serif;
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+
+  /* Brand-specific surfaces */
+  --color-ink: var(--ink);
+  --color-ink-foreground: var(--ink-foreground);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-border: var(--ink-border);
+  --color-whatsapp: var(--whatsapp);
+  --color-whatsapp-foreground: var(--whatsapp-foreground);
+}
+
+:root {
+  --radius: 0.25rem;
+
+  --background: oklch(0.977 0.004 95);
+  --foreground: oklch(0.16 0.006 60);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.16 0.006 60);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.16 0.006 60);
+
+  --primary: oklch(0.16 0.006 60);
+  --primary-foreground: oklch(0.985 0.003 95);
+
+  --secondary: oklch(0.94 0.005 95);
+  --secondary-foreground: oklch(0.16 0.006 60);
+
+  --muted: oklch(0.94 0.005 95);
+  --muted-foreground: oklch(0.47 0.007 70);
+
+  /* Acid lime — the single accent colour */
+  --accent: oklch(0.87 0.21 128);
+  --accent-foreground: oklch(0.16 0.006 60);
+
+  --destructive: oklch(0.56 0.2 27);
+  --destructive-foreground: oklch(0.985 0.003 95);
+
+  --border: oklch(0.89 0.005 95);
+  --input: oklch(0.86 0.005 95);
+  --ring: oklch(0.16 0.006 60);
+
+  /* Dark brand surface (hero, footer, callouts) */
+  --ink: oklch(0.155 0.005 60);
+  --ink-foreground: oklch(0.975 0.003 95);
+  --ink-muted: oklch(0.72 0.006 80);
+  --ink-border: oklch(1 0 0 / 14%);
+
+  --whatsapp: oklch(0.66 0.16 152);
+  --whatsapp-foreground: oklch(1 0 0);
+}
+
+.dark {
+  --background: oklch(0.155 0.005 60);
+  --foreground: oklch(0.975 0.003 95);
+  --card: oklch(0.2 0.005 60);
+  --card-foreground: oklch(0.975 0.003 95);
+  --popover: oklch(0.2 0.005 60);
+  --popover-foreground: oklch(0.975 0.003 95);
+  --primary: oklch(0.975 0.003 95);
+  --primary-foreground: oklch(0.155 0.005 60);
+  --secondary: oklch(0.25 0.005 60);
+  --secondary-foreground: oklch(0.975 0.003 95);
+  --muted: oklch(0.25 0.005 60);
+  --muted-foreground: oklch(0.72 0.006 80);
+  --accent: oklch(0.87 0.21 128);
+  --accent-foreground: oklch(0.155 0.005 60);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 18%);
+  --ring: oklch(0.72 0.006 80);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    /* Never allow sideways scrolling on phones */
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+
+  /* Always-visible, high-contrast focus ring for keyboard users */
+  :focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-accent-foreground);
+  }
+}
+
+/* ---------- Utilities ---------- */
+
+@utility container-page {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 80rem;
+  padding-inline: 1.25rem;
+
+  @media (min-width: 768px) {
+    padding-inline: 2rem;
+  }
+}
+
+/* Section vertical rhythm — tighter on mobile */
+@utility section-y {
+  padding-block: 3.5rem;
+
+  @media (min-width: 768px) {
+    padding-block: 6rem;
+  }
+}
+
+/* Big editorial display type that never overflows small screens */
+@utility display-xl {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  line-height: 0.88;
+  letter-spacing: -0.01em;
+  font-size: clamp(2.75rem, 11vw, 8rem);
+}
+
+@utility display-lg {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  line-height: 0.92;
+  font-size: clamp(2rem, 6.5vw, 4rem);
+}
+
+@utility label-eyebrow {
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* Subtle entrance animation, applied via the Reveal component */
+@utility reveal-hidden {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+@utility reveal-shown {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@utility marquee-track {
+  display: flex;
+  width: max-content;
+  animation: genzz-marquee 32s linear infinite;
+}
+
+@keyframes genzz-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Respect the visitor's motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal-hidden {
+    opacity: 1;
+    transform: none;
+  }
+}
